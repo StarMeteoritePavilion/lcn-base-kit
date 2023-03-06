@@ -1,5 +1,7 @@
 package io.github.lcn29.base.kit.bean;
 
+import io.github.lcn29.base.kit.bean.converter.LocalDate2StringBidirectionalConverter;
+import io.github.lcn29.base.kit.bean.converter.LocalDateTime2StringBidirectionalConverter;
 import ma.glasnost.orika.Converter;
 import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFactory;
@@ -48,6 +50,19 @@ public class OrikaBeanMapper extends ConfigurableMapper {
      */
     public <T, V> void addConvert(Converter<T, V> converter) {
         converterList.add(converter);
+    }
+
+    /**
+     * 开始初始化
+     *
+     * @param autoAddLocalDateStringConverter 是否主任 LocalDate/LocalDateTime 和字符串互转的转换器
+     */
+    public void startInit(boolean autoAddLocalDateStringConverter) {
+        if (autoAddLocalDateStringConverter) {
+            addConvert(new LocalDate2StringBidirectionalConverter());
+            addConvert(new LocalDateTime2StringBidirectionalConverter());
+        }
+        this.init();
     }
 
     @Override
