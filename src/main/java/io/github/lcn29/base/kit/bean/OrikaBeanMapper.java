@@ -1,6 +1,8 @@
 package io.github.lcn29.base.kit.bean;
 
+import io.github.lcn29.base.kit.bean.converter.LocalDate2DateBidirectionalConverter;
 import io.github.lcn29.base.kit.bean.converter.LocalDate2StringBidirectionalConverter;
+import io.github.lcn29.base.kit.bean.converter.LocalDateTime2DateBidirectionalConverter;
 import io.github.lcn29.base.kit.bean.converter.LocalDateTime2StringBidirectionalConverter;
 import ma.glasnost.orika.Converter;
 import ma.glasnost.orika.Mapper;
@@ -61,6 +63,8 @@ public class OrikaBeanMapper extends ConfigurableMapper {
         if (autoAddLocalDateStringConverter) {
             addConvert(new LocalDate2StringBidirectionalConverter());
             addConvert(new LocalDateTime2StringBidirectionalConverter());
+            addConvert(new LocalDate2DateBidirectionalConverter());
+            addConvert(new LocalDateTime2DateBidirectionalConverter());
         }
         this.init();
     }

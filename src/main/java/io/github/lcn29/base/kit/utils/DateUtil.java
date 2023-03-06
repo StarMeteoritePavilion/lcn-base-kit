@@ -5,6 +5,7 @@ import io.github.lcn29.base.kit.constants.BaseConstants;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 
 /**
  * <pre>
@@ -42,6 +43,32 @@ public class DateUtil {
      */
     public static LocalDateTime string2LocalDateTime(String stringDateTime) {
         return LocalDateTime.parse(stringDateTime, DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * Date 转 localDate
+     *
+     * @param date 需要转换的 Date
+     * @return localDate
+     */
+    public static LocalDate date2LocalDate(Date date) {
+        if (date == null) {
+            return null;
+        }
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * Date 转 localDateTime
+     *
+     * @param date 需要转换的 Date
+     * @return localDate
+     */
+    public static LocalDateTime date2LocalDateTime(Date date) {
+        if (date == null) {
+            return null;
+        }
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     /**
@@ -102,6 +129,26 @@ public class DateUtil {
      */
     public static String localDateTime2String(LocalDateTime localDateTime) {
         return localDateTime.format(DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * localDate 转 Date
+     *
+     * @param localDate 需要转换的 LocalDate
+     * @return Date
+     */
+    public static Date localDate2Date(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * localDateTime 转 Date
+     *
+     * @param localDateTime 需要转换的 LocalDateTime
+     * @return Date
+     */
+    public static Date localDateTime2Date(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     /**
